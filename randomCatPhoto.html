@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Random Cat Picture</title>
+</head>
+
+<style>
+    button {
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+    <h1>Random Cat Photo Generator</h1>
+    <img id="image" src="" style="height: 300px; " />
+    <div id="generate">
+        <button id="btn">Generate</button>
+    </div>
+    <div id="axios">
+        <button id="axiosBtn">Get Axios</button>
+    </div>
+    <div id="ronSwanson">
+        <button id="ronSwanson">Laugh</button>
+        <div>
+            <h3 id="quote"></h3>
+        </div>
+    </div>
+</body>
+
+
+<script>
+    $("#btn").click(() => {
+        url = "http://aws.random.cat/meow"
+        $.get({
+                url: url
+            })
+            .done((data) => {
+                console.log("good"), data;
+                document.getElementById("image").src = data.file
+            })
+            .fail((data) => {
+                console.log("Error")
+            })
+    })
+
+    $("#axiosBtn").click(() => {
+        url = "https://opentdb.com/api.php?amount=1";
+        axios.get(url)
+            .then((res) => {
+                console.log(res.data.results[0].answer + ": " + res.data.results[0].question);
+            })
+            .catch(() => {
+                console.log("ERR")
+            })
+    })
+
+    $("#ronSwanson").click(() => {
+        url = "https://ron-swanson-quotes.herokuapp.com/v2/quotes"
+        axios.get(url)
+            .then((res) => {
+                $("#quote").html(res.data[0])
+            })
+    })
+</script>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <title>jQuery Examples</title>
+</head>
+<style>
+</style>
+
+<body>
+
+    <!-- <button id="btn">baconButton</button> -->
+    <button id="get">get()</button>
+    <button id="post">post()</button>
+    <button id="getJSON">getJSON()</button>
+
+</body>
+
+</html>
+
+
+<script>
+    // $('#btn').click(() => {
+    //     url = "https://baconipsum.com/api/?type=meat-and-filler"
+    //     $.ajax({
+    //             method: "get",
+    //             url: url,
+    //             dataType: "json"
+    //         })
+    //         .done((data) => {
+    //             console.log("Response: ", data[0])
+    //         })
+    //         .fail((data) => {
+    //             return console.log("Something went wrong.", data)
+    //         })
+    // })
+
+    $("#get").click(() => {
+        url = "https://api.github.com/users/jbrownEsri";
+        $.ajax({
+                method: "get",
+                url: url
+            })
+            .done((data) => {
+                console.log("Successfully executed GET request: ", data)
+            })
+            .fail((data) => {
+                console.log("Something went wrong: ", data)
+            })
+    })
+
+    $("#post").click(() => {
+        url = "https://api.github.com/users/jbrownEsri";
+        var data = {
+            name: "Charlie",
+            city: "Redlands"
+        };
+        $.post({
+                url: url,
+                data: data
+            })
+            .done((data) => {
+                console.log("Successfully executed GET request: ", data)
+            })
+            .fail((data) => {
+                console.log("Something went wrong: ", data)
+            })
+    })
+
+    $("#getJSON").click(() => {
+        url = "https://api.github.com/users/jbrownEsri";
+        $.getJSON({
+                url: url
+            })
+            .done((data) => {
+                console.log("Successfully executed GET request: ", data)
+            })
+            .fail((data) => {
+                console.log("Something went wrong: ", data)
+            })
+    })
+</script>
