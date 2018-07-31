@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <title>Random Dog Pictures</title>
+</head>
+<style>
+    * {
+        font-family: "Montserrat", sans-serif;
+    }
+
+    img {
+        margin: 50px auto;
+        height: 300px;
+        border: 2px solid teal;
+        border-radius: 300px;
+        background-color: teal;
+        opacity: 0.8;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+
+    a {
+        text-decoration: none;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 200px;
+        background-color: teal;
+        color: white;
+        border: 0;
+        border-bottom: 2px solid gray;
+        border-right: 2px solid gray;
+    }
+
+    a:hover {
+        opacity: 0.8;
+    }
+
+    a:active {
+        border: none;
+        transform: translateX(5px), translateY(-4px);
+    }
+
+    @keyframes fadeInBtnBorder {
+        100% {
+            border-bottom: 4px solid gray;
+            border-right: 4px solid gray;
+        }
+    }
+</style>
+}
+
+<body>
+    <div class="container">
+        <h1>Welcome to Random Dog Pictures</h1>
+        <img id="mainImage" src="#">
+        <a href="#" id="btn">Get Random Dog.</a>
+    </div>
+</body>
+<script>
+    var btn = document.querySelector("#btn");
+    document.getElementById("mainImage").hidden = true;
+
+    btn.addEventListener("click", () => {
+        var XHR = new XMLHttpRequest();
+        XHR.open("GET", "https://dog.ceo/api/breeds/image/random");
+        XHR.send();
+
+        XHR.onreadystatechange = () => {
+            if (XHR.readyState == 4 && XHR.status == 200) {
+                document.getElementById("mainImage").hidden = false;
+                var imageString = JSON.parse(XHR.responseText)
+                document.getElementById("mainImage").src = imageString.message;
+            }
+        }
+
+    })
+</script>
+
+</html>
